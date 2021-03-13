@@ -12,11 +12,13 @@ body {
 p {
   font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
+  margin: 0;
 }
 
 .input-group {
   display: flex;
   align-items: center;
+  margin-bottom: 3rem;
 }
 
 label[for='city-search'] {
@@ -50,9 +52,19 @@ label[for='city-search'] {
   padding: 0.5rem;
 }
 
+.daily {
+  display: flex;
+}
+
 .icon {
   display: flex;
   flex-direction: column;
+}
+
+.description {
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .weather-icon {
@@ -61,4 +73,6 @@ label[for='city-search'] {
 
 .data {
   display: flex;
+  flex-direction: column;
+  letter-spacing: 1px;
 }
