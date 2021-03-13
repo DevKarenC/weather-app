@@ -16,12 +16,23 @@ async function getWeather(location) {
 }
 
 // Display weather data on the DOM
-const weatherDataSection = document.querySelector('.weather-data');
+const icon = document.querySelector('.weather-icon');
+const description = document.querySelector('.description');
+const temp = document.querySelector('.temp');
+const feelTemp = document.querySelector('.feels-like-temp');
+const humidity = document.querySelector('.humidity');
+const wind = document.querySelector('.wind');
+
 async function displayWeather(location) {
   const data = await getWeather(location);
-  const temp = data.main.temp;
   console.log(data);
-  // weatherDataSection.append(temp);
+  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+  icon.alt = `${data.weather[0].description} icon`;
+  description.textContent = data.weather[0].description;
+  temp.textContent = data.main.temp;
+  feelTemp.textContent = data.main.feels_like;
+  humidity.textContent = data.main.humidity;
+  wind.textContent = data.wind.speed;
 }
 
 // Handling user's location search
