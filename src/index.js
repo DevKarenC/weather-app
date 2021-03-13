@@ -27,10 +27,10 @@ async function getWeather(location) {
   weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
     1,
   )}`;
-  weatherData.temp = data.main.temp;
-  weatherData.feelTemp = data.main.feels_like;
+  weatherData.temp = Math.round(data.main.temp);
+  weatherData.feelTemp = Math.round(data.main.feels_like);
   weatherData.humidity = data.main.humidity;
-  weatherData.wind = data.wind.speed;
+  weatherData.wind = Math.round(data.wind.speed);
 }
 
 // Display weather data on the DOM
@@ -46,10 +46,16 @@ async function displayWeather(location) {
   icon.src = weatherData.iconSrc;
   icon.alt = weatherData.iconAlt;
   description.textContent = weatherData.description;
-  temp.textContent = `Temperature: ${weatherData.temp}`;
-  feelTemp.textContent = `Feels like: ${weatherData.feelTemp}`;
+  temp.textContent = `Temperature: ${weatherData.temp}${
+    unit === 'metric' ? '°C' : '°F'
+  }`;
+  feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
+    unit === 'metric' ? '°C' : '°F'
+  }`;
   humidity.textContent = `Humidity: ${weatherData.humidity}%`;
-  wind.textContent = `Wind Speed: ${weatherData.wind}`;
+  wind.textContent = `Wind Speed: ${weatherData.wind} ${
+    unit === 'metric' ? 'm/s' : 'mph'
+  }`;
 }
 
 // Handling user's location search
@@ -70,21 +76,40 @@ function handleSearch(e) {
 
 // Convert fahrenheit to celsius
 function fToC(f) {
-  return (f - 32) * (5 / 9);
+  return Math.round((f - 32) * (5 / 9));
 }
 
-// Convert celsius to fahrenheit
-function cToF(c) {
-  return (c * 9) / 5 + 32;
+// Convert miles per hour to meter/second
+function milesToMeters(miles) {
+  return Math.round(miles / 2.23694);
 }
 
-let tempUnit = 'fahrenheit';
-const tempButton = document.querySelector('.temp-button');
-tempButton.addEventListener('click', convertTemperature);
+let unit = 'imperial';
+const unitButton = document.querySelector('.unit-button');
+unitButton.addEventListener('click', convertUnit);
 
-function convertTemperature(temp) {
-  if (tempUnit === 'fahrenheit') {
+function convertUnit() {
+  if (unit === 'imperial') {
+    unit = 'metric';
+    temp.textContent = `Temperature: ${fToC(Number(weatherData.temp))}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    feelTemp.textContent = `Feels like: ${fToC(Number(weatherData.feelTemp))}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    wind.textContent = `Wind Speed: ${milesToMeters(
+      Number(weatherData.wind),
+    )} ${unit === 'metric' ? 'm/s' : 'mph'}`;
   } else {
-    tempUnit = 'celsius';
+    unit = 'imperial';
+    temp.textContent = `Temperature: ${weatherData.temp}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    wind.textContent = `Wind Speed: ${weatherData.wind} ${
+      unit === 'metric' ? 'm/s' : 'mph'
+    }`;
   }
 }
