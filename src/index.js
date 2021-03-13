@@ -28,7 +28,9 @@ async function displayWeather(location) {
   console.log(data);
   icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   icon.alt = `${data.weather[0].description} icon`;
-  description.textContent = data.weather[0].description;
+  description.textContent = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
+    1,
+  )}`;
   temp.textContent = `Temperature: ${data.main.temp}`;
   feelTemp.textContent = `Feels like: ${data.main.feels_like}`;
   humidity.textContent = `Humidity: ${data.main.humidity}`;
@@ -51,4 +53,14 @@ function handleSubmit(e) {
 function handleSearch(e) {
   const input = e.target.value;
   displayWeather(input);
+}
+
+// Convert fahrenheit to celsius
+function fToC(f) {
+  return (f - 32) * (5 / 9);
+}
+
+// Convert celsius to fahrenheit
+function cToF(c) {
+  return (c * 9) / 5 + 32;
 }

@@ -1,3 +1,5 @@
+/* || GENERAL */
+
 body {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,11 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
 }
 
 .input-group {
@@ -41,4 +48,17 @@ label[for='city-search'] {
   font-size: 2rem;
   border: 0;
   padding: 0.5rem;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-icon {
+  width: 75px;
+}
+
+.data {
+  display: flex;
 }
