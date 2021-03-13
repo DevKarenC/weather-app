@@ -2,3 +2,4 @@
 src/ApiKey.js
 
 node_modules
+dist/
