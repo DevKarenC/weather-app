@@ -29,10 +29,10 @@ async function displayWeather(location) {
   icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   icon.alt = `${data.weather[0].description} icon`;
   description.textContent = data.weather[0].description;
-  temp.textContent = data.main.temp;
-  feelTemp.textContent = data.main.feels_like;
-  humidity.textContent = data.main.humidity;
-  wind.textContent = data.wind.speed;
+  temp.textContent = `Temperature: ${data.main.temp}`;
+  feelTemp.textContent = `Feels like: ${data.main.feels_like}`;
+  humidity.textContent = `Humidity: ${data.main.humidity}`;
+  wind.textContent = `Wind Speed: ${data.wind.speed}`;
 }
 
 // Handling user's location search
@@ -45,7 +45,7 @@ function handleSubmit(e) {
   const input = e.target[0].value;
   e.preventDefault();
   displayWeather(input);
-  // this.reset();
+  this.reset();
 }
 
 function handleSearch(e) {

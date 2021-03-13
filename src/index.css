@@ -1,5 +1,6 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -8,33 +9,36 @@ body {
 
 .input-group {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  border: 10px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  width: 300px;
 }
 
 label[for='city-search'] {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4rem;
+  letter-spacing: 3px;
+  margin-right: 1rem;
 }
 
 #search-input {
-  border: 5px solid skyblue;
-  border-radius: 10px;
-  outline: 0;
-  height: 3rem;
-  font-size: 1.25rem;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4rem;
+  letter-spacing: 3px;
+  width: 300px;
+}
+
+.input-group span {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4rem;
+  margin: 0 1rem;
 }
 
 #search-button {
-  background-color: #fff;
-  color: skyblue;
+  background-color: transparent;
+  color: gray;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 2rem;
   border: 0;
   padding: 0.5rem;
-  height: 3rem;
 }
