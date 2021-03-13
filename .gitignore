@@ -1,4 +1,4 @@
 # API
-.env
+src/ApiKey.js
 
 node_modules

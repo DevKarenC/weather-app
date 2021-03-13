@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -11,9 +10,6 @@ module.exports = {
     contentBase: './dist',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
-    }),
     new HtmlWebpackPlugin({
       title: "What's the Weather?",
       template: 'src/index.html',
