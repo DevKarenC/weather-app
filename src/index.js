@@ -4,6 +4,8 @@ import 'regenerator-runtime/runtime';
 import { API_KEY } from './ApiKey';
 
 const weatherData = {
+  city: '',
+  country: '',
   iconSrc: '',
   iconAlt: '',
   description: '',
@@ -22,6 +24,9 @@ async function getWeather(location) {
     },
   );
   const data = await response.json();
+  console.log(data);
+  weatherData.city = `${data.name}`;
+  weatherData.country = `${data.sys.country}`;
   weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   weatherData.iconAlt = `${data.weather[0].description} icon`;
   weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
@@ -34,6 +39,7 @@ async function getWeather(location) {
 }
 
 // Display weather data on the DOM
+const cityCountry = document.querySelector('.city-country');
 const icon = document.querySelector('.weather-icon');
 const description = document.querySelector('.description');
 const temp = document.querySelector('.temp');
@@ -43,6 +49,7 @@ const wind = document.querySelector('.wind');
 
 async function displayWeather(location) {
   await getWeather(location);
+  cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
   icon.src = weatherData.iconSrc;
   icon.alt = weatherData.iconAlt;
   description.textContent = weatherData.description;
@@ -113,3 +120,6 @@ function convertUnit() {
     }`;
   }
 }
+
+// Display weather for San Francisco as default
+displayWeather('San Francisco');
