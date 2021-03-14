@@ -23,34 +23,30 @@ const weatherData = {
 
 // Making an API call to get the weather data
 async function getWeather(location) {
-  try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`,
-      {
-        mode: 'cors',
-      },
-    );
-    const data = await response.json();
-    if (data.cod !== '400' || data.cod !== '404') {
-      weatherData.city = `${data.name}`;
-      weatherData.country = `${data.sys.country}`;
-      weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-      weatherData.iconAlt = `${data.weather[0].description} icon`;
-      weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
-        1,
-      )}`;
-      weatherData.temp = Math.round(data.main.temp);
-      weatherData.feelTemp = Math.round(data.main.feels_like);
-      weatherData.humidity = data.main.humidity;
-      weatherData.wind = Math.round(data.wind.speed);
-      errorMessage.textContent = '';
-    } else {
-      errorMessage.textContent = ERROR_MSG_CITY;
-    }
-    return true;
-  } catch (e) {
-    errorMessage.textContent = ERROR_MSG_INPUT;
-    return false;
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`,
+    {
+      mode: 'cors',
+    },
+  );
+  const data = await response.json();
+  if (data.cod !== '400' && data.cod !== '404') {
+    weatherData.city = `${data.name}`;
+    weatherData.country = `${data.sys.country}`;
+    weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    weatherData.iconAlt = `${data.weather[0].description} icon`;
+    weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
+      1,
+    )}`;
+    weatherData.temp = Math.round(data.main.temp);
+    weatherData.feelTemp = Math.round(data.main.feels_like);
+    weatherData.humidity = data.main.humidity;
+    weatherData.wind = Math.round(data.wind.speed);
+    errorMessage.textContent = '';
+  } else if (data.cod === '404') {
+    throw new Error('No matching city');
+  } else if (data.cod === '400') {
+    throw new Error('No input');
   }
 }
 
@@ -64,22 +60,27 @@ const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 
 async function displayWeather(location) {
-  if (await getWeather(location)) {
-    cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
-    icon.src = weatherData.iconSrc;
-    icon.alt = weatherData.iconAlt;
-    description.textContent = weatherData.description;
-    temp.textContent = `Temperature: ${weatherData.temp}${
-      unit === 'metric' ? '°C' : '°F'
-    }`;
-    feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
-      unit === 'metric' ? '°C' : '°F'
-    }`;
-    humidity.textContent = `Humidity: ${weatherData.humidity}%`;
-    wind.textContent = `Wind Speed: ${weatherData.wind} ${
-      unit === 'metric' ? 'm/s' : 'mph'
-    }`;
-  }
+  await getWeather(location).catch((error) => {
+    if (error.message === 'No matching city') {
+      errorMessage.textContent = ERROR_MSG_CITY;
+    } else if (error.message === 'No input') {
+      errorMessage.textContent = ERROR_MSG_INPUT;
+    }
+  });
+  cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
+  icon.src = weatherData.iconSrc;
+  icon.alt = weatherData.iconAlt;
+  description.textContent = weatherData.description;
+  temp.textContent = `Temperature: ${weatherData.temp}${
+    unit === 'metric' ? '°C' : '°F'
+  }`;
+  feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
+    unit === 'metric' ? '°C' : '°F'
+  }`;
+  humidity.textContent = `Humidity: ${weatherData.humidity}%`;
+  wind.textContent = `Wind Speed: ${weatherData.wind} ${
+    unit === 'metric' ? 'm/s' : 'mph'
+  }`;
 }
 
 // Handling user's location search
