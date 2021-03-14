@@ -3,6 +3,12 @@ import 'core-js';
 import 'regenerator-runtime/runtime';
 import { API_KEY } from './ApiKey';
 
+// Handle error
+const errorMessage = document.querySelector('.error-msg');
+const ERROR_MSG_CITY =
+  'No matching location found. Try again with a different city name.';
+const ERROR_MSG_INPUT = 'Please type in a city name.';
+
 const weatherData = {
   city: '',
   country: '',
@@ -17,25 +23,35 @@ const weatherData = {
 
 // Making an API call to get the weather data
 async function getWeather(location) {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`,
-    {
-      mode: 'cors',
-    },
-  );
-  const data = await response.json();
-  console.log(data);
-  weatherData.city = `${data.name}`;
-  weatherData.country = `${data.sys.country}`;
-  weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  weatherData.iconAlt = `${data.weather[0].description} icon`;
-  weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
-    1,
-  )}`;
-  weatherData.temp = Math.round(data.main.temp);
-  weatherData.feelTemp = Math.round(data.main.feels_like);
-  weatherData.humidity = data.main.humidity;
-  weatherData.wind = Math.round(data.wind.speed);
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`,
+      {
+        mode: 'cors',
+      },
+    );
+    const data = await response.json();
+    if (data.cod !== '400' || data.cod !== '404') {
+      weatherData.city = `${data.name}`;
+      weatherData.country = `${data.sys.country}`;
+      weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      weatherData.iconAlt = `${data.weather[0].description} icon`;
+      weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
+        1,
+      )}`;
+      weatherData.temp = Math.round(data.main.temp);
+      weatherData.feelTemp = Math.round(data.main.feels_like);
+      weatherData.humidity = data.main.humidity;
+      weatherData.wind = Math.round(data.wind.speed);
+      errorMessage.textContent = '';
+    } else {
+      errorMessage.textContent = ERROR_MSG_CITY;
+    }
+    return true;
+  } catch (e) {
+    errorMessage.textContent = ERROR_MSG_INPUT;
+    return false;
+  }
 }
 
 // Display weather data on the DOM
@@ -48,21 +64,22 @@ const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 
 async function displayWeather(location) {
-  await getWeather(location);
-  cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
-  icon.src = weatherData.iconSrc;
-  icon.alt = weatherData.iconAlt;
-  description.textContent = weatherData.description;
-  temp.textContent = `Temperature: ${weatherData.temp}${
-    unit === 'metric' ? '°C' : '°F'
-  }`;
-  feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
-    unit === 'metric' ? '°C' : '°F'
-  }`;
-  humidity.textContent = `Humidity: ${weatherData.humidity}%`;
-  wind.textContent = `Wind Speed: ${weatherData.wind} ${
-    unit === 'metric' ? 'm/s' : 'mph'
-  }`;
+  if (await getWeather(location)) {
+    cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
+    icon.src = weatherData.iconSrc;
+    icon.alt = weatherData.iconAlt;
+    description.textContent = weatherData.description;
+    temp.textContent = `Temperature: ${weatherData.temp}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
+      unit === 'metric' ? '°C' : '°F'
+    }`;
+    humidity.textContent = `Humidity: ${weatherData.humidity}%`;
+    wind.textContent = `Wind Speed: ${weatherData.wind} ${
+      unit === 'metric' ? 'm/s' : 'mph'
+    }`;
+  }
 }
 
 // Handling user's location search

@@ -18,7 +18,7 @@ p {
 .input-group {
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 label[for='city-search'] {
@@ -50,6 +50,11 @@ label[for='city-search'] {
   font-size: 2rem;
   border: 0;
   padding: 0.5rem;
+}
+
+.error-msg {
+  color: crimson;
+  margin-bottom: 1.5rem;
 }
 
 .daily {
