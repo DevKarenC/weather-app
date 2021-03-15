@@ -21,10 +21,22 @@ const weatherData = {
   wind: '',
 };
 
+// Making an API call to get the corresponding image for the input city
+async function getImage(location) {
+  const response = await fetch(
+    `https://api.unsplash.com/photos/random?client_id=${API_KEY.UNSPLASH_API_KEY}&query=${location}&orientation=landscape`,
+    {
+      mode: 'cors',
+    },
+  );
+  const data = await response.json();
+  return data.urls.full;
+}
+
 // Making an API call to get the weather data
 async function getWeather(location) {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY.OPEN_WEATHER_API_KEY}`,
     {
       mode: 'cors',
     },
@@ -79,20 +91,30 @@ async function displayWeather(location) {
   wind.textContent = `${weatherData.wind} ${unit === 'metric' ? 'm/s' : 'mph'}`;
 }
 
+// Display fetches image as background image
+const body = document.querySelector('body');
+
+async function displayImage(location) {
+  const imgURL = await getImage(location);
+  body.style.backgroundImage = `url(${imgURL})`;
+}
+
 // Handling user's location search
 const form = document.querySelector('.input-group');
 const searchButton = document.querySelector('#search-button');
-form.addEventListener('submit', handleSubmit);
-searchButton.addEventListener('submit', handleSearch);
+form.addEventListener('submit', handleFormSubmit);
+searchButton.addEventListener('submit', handleSearchButton);
 
-function handleSubmit(e) {
+function handleFormSubmit(e) {
   e.preventDefault();
   displayWeather(e.target[0].value);
+  displayImage(e.target[0].value);
   this.reset();
 }
 
-function handleSearch(e) {
+function handleSearchButton(e) {
   displayWeather(e.target.value);
+  // displayImage(e.target[0].value);
 }
 
 // Convert fahrenheit to celsius
