@@ -1,9 +1,10 @@
 /* || GENERAL */
 
 body {
+  min-height: 100vh;
+  width: 100vw;
   margin: 0;
   background: center no-repeat fixed;
-  /* background-image: url('san-francisco.jpg'); */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,11 +18,12 @@ body {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.85);
+  overflow: scroll;
 }
 
 p {
@@ -35,13 +37,14 @@ p {
 .input-group {
   display: flex;
   align-items: center;
-  margin: 2rem 0 4rem;
+  margin: 2rem 2rem 4rem;
 }
 
 label[for='city-search'] {
   font-family: 'Bebas Neue', cursive;
   font-size: 4rem;
   letter-spacing: 3px;
+  text-align: center;
   margin-right: 1rem;
 }
 
@@ -52,6 +55,7 @@ label[for='city-search'] {
   font-family: 'Bebas Neue', cursive;
   font-size: 4rem;
   letter-spacing: 3px;
+  text-align: center;
   width: 300px;
 }
 
@@ -85,6 +89,7 @@ label[for='city-search'] {
   letter-spacing: 1px;
   text-align: center;
   margin-bottom: 2rem;
+  height: 2rem;
 }
 
 .daily {
@@ -158,4 +163,71 @@ button {
   background-color: #2866a0;
   border: 1px solid #2866a0;
   border-radius: 0.5rem;
+}
+
+/* || MEDIA QUERY */
+@media only screen and (max-width: 750px) {
+  .input-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  .input-group span {
+    font-size: 3rem;
+  }
+
+  label[for='city-search'] {
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  #search-input {
+    font-size: 3rem;
+    width: 250px;
+  }
+
+  #search-button {
+    margin: 0;
+  }
+
+  .city-country {
+    font-size: 1.5rem;
+  }
+
+  .daily {
+    flex-direction: column;
+    align-items: center;
+    height: 450px;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .data {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .data > div {
+    justify-content: center;
+  }
+
+  .temperature {
+    margin-bottom: 1rem;
+  }
+
+  .icon {
+    flex: 1 !important;
+  }
+
+  .unit-button {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .input-group {
+    width: 300px;
+  }
 }
