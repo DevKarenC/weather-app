@@ -13,39 +13,51 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nanum+Gothic&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <p class="error-msg"></p>
-    <form class="input-group">
-      <label for="city-search">What's the Weather in</label>
-      <input
-        type="search"
-        id="search-input"
-        aria-label="Search by city name for weather data"
-      />
-      <span>?</span>
-      <button type="submit" id="search-button">
-        <i class="fas fa-search"></i>
-      </button>
-    </form>
-    <div class="weather-data">
-      <p class="city-country"></p>
-      <div class="daily">
-        <div class="icon">
-          <p class="description"></p>
-          <img class="weather-icon" />
+    <div class="layer">
+      <p class="error-msg"></p>
+      <form class="input-group">
+        <label for="city-search">What's the Weather in</label>
+        <input
+          type="search"
+          id="search-input"
+          aria-label="Search by city name for weather data"
+        />
+        <span>?</span>
+        <button type="submit" id="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      <div class="weather-data">
+        <p class="city-country"></p>
+        <div class="daily">
+          <div class="temperature">
+            <p class="temp"></p>
+          </div>
+          <div class="data">
+            <div class="icon">
+              <span class="description"></span>
+              <img class="weather-icon" />
+            </div>
+            <div>
+              Feels Like
+              <p class="feels-like-temp"></p>
+            </div>
+            <div>
+              Humidity
+              <p class="humidity"></p>
+            </div>
+            <div>
+              Wind Speed
+              <p class="wind"></p>
+            </div>
+          </div>
         </div>
-        <div class="data">
-          <p class="temp"></p>
-          <p class="feels-like-temp"></p>
-          <p class="humidity"></p>
-          <p class="wind"></p>
-        </div>
+        <button class="unit-button">Metric (°C) / Imperial (°F)</button>
       </div>
-      <button class="unit-button">Metric (°C) / Imperial (°F)</button>
-    </div>
   </body>
 </html>

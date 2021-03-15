@@ -71,16 +71,12 @@ async function displayWeather(location) {
   icon.src = weatherData.iconSrc;
   icon.alt = weatherData.iconAlt;
   description.textContent = weatherData.description;
-  temp.textContent = `Temperature: ${weatherData.temp}${
+  temp.textContent = `${weatherData.temp}${unit === 'metric' ? '°C' : '°F'}`;
+  feelTemp.textContent = `${weatherData.feelTemp}${
     unit === 'metric' ? '°C' : '°F'
   }`;
-  feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
-    unit === 'metric' ? '°C' : '°F'
-  }`;
-  humidity.textContent = `Humidity: ${weatherData.humidity}%`;
-  wind.textContent = `Wind Speed: ${weatherData.wind} ${
-    unit === 'metric' ? 'm/s' : 'mph'
-  }`;
+  humidity.textContent = `${weatherData.humidity}%`;
+  wind.textContent = `${weatherData.wind} ${unit === 'metric' ? 'm/s' : 'mph'}`;
 }
 
 // Handling user's location search
@@ -116,24 +112,22 @@ unitButton.addEventListener('click', convertUnit);
 function convertUnit() {
   if (unit === 'imperial') {
     unit = 'metric';
-    temp.textContent = `Temperature: ${fToC(Number(weatherData.temp))}${
+    temp.textContent = `${fToC(Number(weatherData.temp))}${
       unit === 'metric' ? '°C' : '°F'
     }`;
-    feelTemp.textContent = `Feels like: ${fToC(Number(weatherData.feelTemp))}${
+    feelTemp.textContent = `${fToC(Number(weatherData.feelTemp))}${
       unit === 'metric' ? '°C' : '°F'
     }`;
-    wind.textContent = `Wind Speed: ${milesToMeters(
-      Number(weatherData.wind),
-    )} ${unit === 'metric' ? 'm/s' : 'mph'}`;
+    wind.textContent = `${milesToMeters(Number(weatherData.wind))} ${
+      unit === 'metric' ? 'm/s' : 'mph'
+    }`;
   } else {
     unit = 'imperial';
-    temp.textContent = `Temperature: ${weatherData.temp}${
+    temp.textContent = `${weatherData.temp}${unit === 'metric' ? '°C' : '°F'}`;
+    feelTemp.textContent = `${weatherData.feelTemp}${
       unit === 'metric' ? '°C' : '°F'
     }`;
-    feelTemp.textContent = `Feels like: ${weatherData.feelTemp}${
-      unit === 'metric' ? '°C' : '°F'
-    }`;
-    wind.textContent = `Wind Speed: ${weatherData.wind} ${
+    wind.textContent = `${weatherData.wind} ${
       unit === 'metric' ? 'm/s' : 'mph'
     }`;
   }
