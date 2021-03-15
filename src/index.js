@@ -30,7 +30,7 @@ async function getImage(location) {
     },
   );
   const data = await response.json();
-  return data.urls.full;
+  return data.urls.regular;
 }
 
 // Making an API call to get the weather data
@@ -42,7 +42,7 @@ async function getWeather(location) {
     },
   );
   const data = await response.json();
-  if (data.cod !== '400' && data.cod !== '404') {
+  if (response.ok) {
     weatherData.city = `${data.name}`;
     weatherData.country = `${data.sys.country}`;
     weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
@@ -55,6 +55,7 @@ async function getWeather(location) {
     weatherData.humidity = data.main.humidity;
     weatherData.wind = Math.round(data.wind.speed);
     errorMessage.textContent = '';
+    displayImage(location);
   } else if (data.cod === '404') {
     throw new Error('No matching city');
   } else if (data.cod === '400') {
@@ -95,8 +96,7 @@ async function displayWeather(location) {
 const body = document.querySelector('body');
 
 async function displayImage(location) {
-  const imgURL = await getImage(location);
-  body.style.backgroundImage = `url(${imgURL})`;
+  body.style.backgroundImage = `url(${await getImage(location)})`;
 }
 
 // Handling user's location search
@@ -108,13 +108,11 @@ searchButton.addEventListener('submit', handleSearchButton);
 function handleFormSubmit(e) {
   e.preventDefault();
   displayWeather(e.target[0].value);
-  displayImage(e.target[0].value);
   this.reset();
 }
 
 function handleSearchButton(e) {
   displayWeather(e.target.value);
-  // displayImage(e.target[0].value);
 }
 
 // Convert fahrenheit to celsius

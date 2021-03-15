@@ -3,7 +3,7 @@
 body {
   margin: 0;
   background: center no-repeat fixed;
-  background-image: url('san-francisco.jpg');
+  /* background-image: url('san-francisco.jpg'); */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -130,7 +130,7 @@ label[for='city-search'] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 2 !important
+  flex: 2 !important;
 }
 
 .description {
