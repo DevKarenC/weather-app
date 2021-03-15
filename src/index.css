@@ -107,7 +107,7 @@ label[for='city-search'] {
 .data {
   display: flex;
   justify-content: space-between;
-  flex: 4;
+  flex: 5;
   letter-spacing: 1px;
   width: 500px;
 }
@@ -130,15 +130,20 @@ label[for='city-search'] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 2 !important
 }
 
 .description {
   letter-spacing: 1px;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .weather-icon {
-  width: 50px;
+  width: 49px;
+  background-color: #a0deff;
+  border: 1px solid #a0deff;
+  border-radius: 50%;
 }
 
 button {

@@ -91,7 +91,7 @@ async function displayWeather(location) {
   wind.textContent = `${weatherData.wind} ${unit === 'metric' ? 'm/s' : 'mph'}`;
 }
 
-// Display fetches image as background image
+// Display fetched image as background image
 const body = document.querySelector('body');
 
 async function displayImage(location) {
