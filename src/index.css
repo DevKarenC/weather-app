@@ -80,6 +80,7 @@ label[for='city-search'] {
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
+  text-align: center;
   color: #2866a0;
 }
 
@@ -192,6 +193,10 @@ button {
     margin: 0;
   }
 
+  .error-msg {
+    margin-top: 2rem;
+  }
+
   .city-country {
     font-size: 1.5rem;
   }
@@ -223,11 +228,6 @@ button {
 
   .unit-button {
     font-size: 1rem;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-  .input-group {
-    width: 300px;
+    margin-bottom: 2rem;
   }
 }

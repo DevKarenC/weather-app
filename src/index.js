@@ -2,6 +2,30 @@ import './index.css';
 import 'core-js';
 import 'regenerator-runtime/runtime';
 import { API_KEY } from './ApiKey';
+const Papa = require('papaparse');
+
+// Parse CSV file for country codes and provide full country name
+function parseCSV() {
+  Papa.parse(
+    'https://pkgstore.datahub.io/core/country-list/data_csv/data/d7c9d7cfb42cb69f4422dec222dbbaa8/data_csv.csv',
+    {
+      download: true,
+      delimiter: ',',
+      newline: '',
+      skipEmptyLines: true,
+      header: true,
+      complete: function (results) {
+        const countryCodes = results.data.reduce(function (obj, value) {
+          obj[value.Code] = value.Name;
+          return obj;
+        }, {});
+        cityCountry.textContent = `${weatherData.city}, ${
+          countryCodes[weatherData.country]
+        }`;
+      },
+    },
+  );
+}
 
 // Handle error
 const errorMessage = document.querySelector('.error-msg');
@@ -56,6 +80,7 @@ async function getWeather(location) {
     weatherData.wind = Math.round(data.wind.speed);
     errorMessage.textContent = '';
     displayImage(location);
+    parseCSV();
   } else if (data.cod === '404') {
     throw new Error('No matching city');
   } else if (data.cod === '400') {
@@ -80,7 +105,6 @@ async function displayWeather(location) {
       errorMessage.textContent = ERROR_MSG_INPUT;
     }
   });
-  cityCountry.textContent = `${weatherData.city}, ${weatherData.country}`;
   icon.src = weatherData.iconSrc;
   icon.alt = weatherData.iconAlt;
   description.textContent = weatherData.description;
