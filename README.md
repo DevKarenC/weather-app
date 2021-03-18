@@ -48,8 +48,8 @@ This weather app:
 
 ### Responsive design - tablet size
 
-<img src="src/assets/images/weather-app-responsive-tablet-size.png" alt="Responding to the tablet size screen">
+<img src="src/assets/images/weather-app-responsive-tablet-size.png" alt="Responding to the tablet size screen" width="600px">
 
 ### Responsive design - mobile size
 
-<img src="src/assets/images/weather-app-responsive-mobile-size.png" alt="Responding to the mobile phone size screen">
+<img src="src/assets/images/weather-app-responsive-mobile-size.png" alt="Responding to the mobile phone size screen" width="300px">
