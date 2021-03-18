@@ -167,6 +167,7 @@ button {
 }
 
 /* || MEDIA QUERY */
+
 @media only screen and (max-width: 750px) {
   .input-group {
     flex-wrap: wrap;
