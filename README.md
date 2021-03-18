@@ -2,7 +2,7 @@
 
 This weather app lets you search for cities and provide the current weather for the location.
 
-## How to Use
+## How to Use ☂️
 
 To use the website, please create the `ApiKey.js` file in the same directory as `index.js` and store your own [OpenWeather](https://openweathermap.org/api) API Key inside the `OPEN_WEATHER_API_KEY` constant as well as your own [Unsplash](https://unsplash.com/documentation#creating-a-developer-account) API key inside the `UNSPLASH_API_KEY` constant. Place both constants inside the `ApiKey.js` file.
 
