@@ -24,7 +24,7 @@ This weather app:
 - [x] Practice Asynchronous JavaScript using Promises, Fetch API, Async/Await, .catch error handler
 - [x] Understand how to use third party libraries and APIs by reading the documentation
 - [x] Practice DOM manipulation and conditional rendering using JavaScript
-- [x] Protect sensitive data such as API keys
+- [x] Protect sensitive credentials such as API keys
 - [x] Modularize code for better readability and the Single Responsibility Principle
 - [x] Bundle modules using webpack5 and use webpack loaders and plugins
 
