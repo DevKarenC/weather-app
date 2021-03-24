@@ -1,10 +1,14 @@
-# weather-app 🌤
+# Weather App 🌤
 
 This weather app lets you search for cities and provide the current weather for the location.
 
 ## How to Use ☂️
 
-To use the website, please create the `ApiKey.js` file in the same directory as `index.js` and store your own [OpenWeather](https://openweathermap.org/api) API Key inside the `OPEN_WEATHER_API_KEY` constant as well as your own [Unsplash](https://unsplash.com/documentation#creating-a-developer-account) API key inside the `UNSPLASH_API_KEY` constant. Place both constants inside the `ApiKey.js` file.
+To use the website:
+
+1. Please create an `ApiKey.js` file in the same directory as `index.js`.
+2. Store your own [OpenWeather](https://openweathermap.org/api) API Key in the `OPEN_WEATHER_API_KEY` constant as well as your own [Unsplash](https://unsplash.com/documentation#creating-a-developer-account) API key in the `UNSPLASH_API_KEY` constant.
+3. Place both constants inside the `ApiKey.js` file.
 
 ## Features 🖋
 
@@ -32,24 +36,24 @@ This weather app:
 
 ### Weather App
 
-<img src="src/assets/images/weather-app-screenshot.png" alt="Weather app screenshot" width="800px">
+<img src="images/weather-app-screenshot.png" alt="Weather app screenshot" width="800px">
 
 ### Demo Usage
 
-<img src="src/assets/images/weather-app-demo.gif" alt="Demo weather app usage" width="800px">
+<img src="images/weather-app-demo.gif" alt="Demo weather app usage" width="800px">
 
 ### Handle the empty input error
 
-<img src="src/assets/images/weather-app-empty-input.png" alt="Handling the empty input error" width="800px">
+<img src="images/weather-app-empty-input.png" alt="Handling the empty input error" width="800px">
 
 ### Handle the no-city-found error
 
-<img src="src/assets/images/weather-app-no-city-found.png" alt="Handling the no-city-found error" width="800px">
+<img src="images/weather-app-no-city-found.png" alt="Handling the no-city-found error" width="800px">
 
 ### Responsive design - tablet size
 
-<img src="src/assets/images/weather-app-responsive-tablet-size.png" alt="Responding to the tablet size screen" width="600px">
+<img src="images/weather-app-responsive-tablet-size.png" alt="Responding to the tablet size screen" width="600px">
 
 ### Responsive design - mobile size
 
-<img src="src/assets/images/weather-app-responsive-mobile-size.png" alt="Responding to the mobile phone size screen" width="300px">
+<img src="images/weather-app-responsive-mobile-size.png" alt="Responding to the mobile phone size screen" width="300px">
