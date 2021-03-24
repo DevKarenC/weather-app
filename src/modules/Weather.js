@@ -30,18 +30,28 @@ async function getWeather(location) {
     },
   );
   const data = await response.json();
+  console.log(data);
   if (response.ok) {
-    weatherData.city = `${data.name}`;
-    weatherData.country = `${data.sys.country}`;
-    weatherData.iconSrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-    weatherData.iconAlt = `${data.weather[0].description} icon`;
-    weatherData.description = `${data.weather[0].description[0].toUpperCase()}${data.weather[0].description.slice(
+    // Use destructuring for the nested data object
+    const {
+      name,
+      sys: { country },
+      weather,
+      main: { temp, feels_like, humidity },
+      wind: { speed },
+    } = data;
+
+    weatherData.city = `${name}`;
+    weatherData.country = `${country}`;
+    weatherData.iconSrc = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+    weatherData.iconAlt = `${weather[0].description} icon`;
+    weatherData.description = `${weather[0].description[0].toUpperCase()}${weather[0].description.slice(
       1,
     )}`;
-    weatherData.temp = Math.round(data.main.temp);
-    weatherData.feelTemp = Math.round(data.main.feels_like);
-    weatherData.humidity = data.main.humidity;
-    weatherData.wind = Math.round(data.wind.speed);
+    weatherData.temp = Math.round(temp);
+    weatherData.feelTemp = Math.round(feels_like);
+    weatherData.humidity = humidity;
+    weatherData.wind = Math.round(speed);
     errorMessage.textContent = '';
     displayImage(location);
     parseCSV();
