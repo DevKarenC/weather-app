@@ -1,6 +1,6 @@
 import { API_KEY } from '../ApiKey';
 import { displayImage } from './BackgroundImage';
-import { unit } from './ToggleUnit';
+import { unit, UNITS } from './ToggleUnit';
 import { parseCSV } from './ParseCountryCodes';
 
 const weatherData = {
@@ -82,12 +82,10 @@ async function displayWeather(location) {
   icon.src = weatherData.iconSrc;
   icon.alt = weatherData.iconAlt;
   description.textContent = weatherData.description;
-  temp.textContent = `${weatherData.temp}${unit === 'metric' ? '°C' : '°F'}`;
-  feelTemp.textContent = `${weatherData.feelTemp}${
-    unit === 'metric' ? '°C' : '°F'
-  }`;
+  temp.textContent = `${weatherData.temp}${UNITS[unit].temp}`;
+  feelTemp.textContent = `${weatherData.feelTemp}${UNITS[unit].temp}`;
   humidity.textContent = `${weatherData.humidity}%`;
-  wind.textContent = `${weatherData.wind} ${unit === 'metric' ? 'm/s' : 'mph'}`;
+  wind.textContent = `${weatherData.wind} ${UNITS[unit].wind}`;
 }
 
 export { weatherData, displayWeather };

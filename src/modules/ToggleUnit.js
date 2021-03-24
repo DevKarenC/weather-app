@@ -1,5 +1,16 @@
 import { weatherData } from './Weather';
 
+const UNITS = {
+  metric: {
+    temp: '°C',
+    wind: 'm/s',
+  },
+  imperial: {
+    temp: '°F',
+    wind: 'mph',
+  },
+};
+
 // Convert fahrenheit to celsius
 function fToC(f) {
   return Math.round((f - 32) * (5 / 9));
@@ -11,6 +22,7 @@ function milesToMeters(miles) {
 }
 
 let unit = 'imperial';
+
 const unitButton = document.querySelector('.unit-button');
 unitButton.addEventListener('click', convertUnit);
 
@@ -21,25 +33,19 @@ const wind = document.querySelector('.wind');
 function convertUnit() {
   if (unit === 'imperial') {
     unit = 'metric';
-    temp.textContent = `${fToC(Number(weatherData.temp))}${
-      unit === 'metric' ? '°C' : '°F'
-    }`;
+    temp.textContent = `${fToC(Number(weatherData.temp))}${UNITS[unit].temp}`;
     feelTemp.textContent = `${fToC(Number(weatherData.feelTemp))}${
-      unit === 'metric' ? '°C' : '°F'
+      UNITS[unit].temp
     }`;
     wind.textContent = `${milesToMeters(Number(weatherData.wind))} ${
-      unit === 'metric' ? 'm/s' : 'mph'
+      UNITS[unit].wind
     }`;
   } else {
     unit = 'imperial';
-    temp.textContent = `${weatherData.temp}${unit === 'metric' ? '°C' : '°F'}`;
-    feelTemp.textContent = `${weatherData.feelTemp}${
-      unit === 'metric' ? '°C' : '°F'
-    }`;
-    wind.textContent = `${weatherData.wind} ${
-      unit === 'metric' ? 'm/s' : 'mph'
-    }`;
+    temp.textContent = `${weatherData.temp}${UNITS[unit].temp}`;
+    feelTemp.textContent = `${weatherData.feelTemp}${UNITS[unit].temp}`;
+    wind.textContent = `${weatherData.wind} ${UNITS[unit].wind}`;
   }
 }
 
-export { unit };
+export { unit, UNITS };
