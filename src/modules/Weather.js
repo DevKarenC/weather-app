@@ -20,6 +20,10 @@ const errorMessage = document.querySelector('.error-msg');
 const ERROR_MSG_CITY =
   'No matching location found. Try again with a different city name.';
 const ERROR_MSG_INPUT = 'Please type in a city name.';
+const errorKeys = {
+  400: 'No input',
+  404: 'No matching city',
+};
 
 // Making an API call to get the weather data
 async function getWeather(location) {
@@ -30,7 +34,6 @@ async function getWeather(location) {
     },
   );
   const data = await response.json();
-  console.log(data);
   if (response.ok) {
     // Use destructuring for the nested data object
     const {
@@ -55,10 +58,8 @@ async function getWeather(location) {
     errorMessage.textContent = '';
     displayImage(location);
     parseCSV();
-  } else if (data.cod === '404') {
-    throw new Error('No matching city');
-  } else if (data.cod === '400') {
-    throw new Error('No input');
+  } else if (data.cod === '400' || data.cod === '404') {
+    throw new Error(errorKeys[data.cod]);
   }
 }
 
